@@ -49,9 +49,6 @@ class LifeCoachHub_Admin
 		// Enqueue admin scripts and styles.
 		add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
 
-		// Ajax handlers for proxy.
-		add_action('wp_ajax_lifecoachhub_proxy', array($this, 'handle_proxy_request'));
-
 		// Handle API key callback and disconnect - moved to admin_init for early processing.
 		add_action('admin_init', array($this, 'handle_api_callback'));
 		add_action('admin_init', array($this, 'handle_disconnect'));
@@ -311,85 +308,6 @@ class LifeCoachHub_Admin
 				'apiKey' => $api_key,
 				'baseAppUrl' => $this->app_url,
 			)
-		);
-	}
-
-	/**
-	 * Handle proxy requests to the app.
-	 */
-	public function handle_proxy_request()
-	{
-		// Check nonce for security.
-		if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'lifecoachhub_proxy_nonce')) {
-			wp_send_json_error(array('message' => 'Invalid security token'), 403);
-		}
-
-		// Make sure user has permission.
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => 'Permission denied'), 403);
-		}
-
-		// Get target URL.
-		$target_path = isset($_REQUEST['path']) ? sanitize_text_field(wp_unslash($_REQUEST['path'])) : '';
-
-		// Validate target path to prevent unauthorized requests.
-		if (empty($target_path)) {
-			wp_send_json_error(array('message' => 'Invalid target path'), 400);
-		}
-
-		$url = trailingslashit($this->app_url) . ltrim($target_path, '/');
-
-		// Set up the request.
-		$args = array(
-			'timeout' => 60,
-			'redirection' => 5,
-			'httpversion' => '1.1',
-			'user-agent' => 'WordPress/' . get_bloginfo('version') . '; ' . home_url(),
-			'headers' => array(
-				'Referer' => home_url(),
-				'Origin' => home_url(),
-			),
-		);
-
-		// Add API key to headers if available.
-		$api_key = get_option('lifecoachhub_api_key');
-		if ($api_key) {
-			$args['headers']['Authorization'] = 'Bearer ' . $api_key;
-			$args['headers']['X-API-Key'] = $api_key;
-		}
-
-		// Get method and add body if needed.
-		$method = isset($_SERVER['REQUEST_METHOD']) ? strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD']))) : 'GET';
-		$args['method'] = $method;
-
-		if ('POST' === $method && isset($_POST) && !empty($_POST)) {
-			// Remove nonce from POST data before forwarding.
-			$post_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			unset($post_data['nonce']);
-			$args['body'] = $post_data;
-		}
-
-		// Make the request.
-		$response = wp_remote_request($url, $args);
-
-		// Check for errors.
-		if (is_wp_error($response)) {
-			wp_send_json_error(array('message' => $response->get_error_message()), 500);
-		}
-
-		// Get the response body.
-		$body = wp_remote_retrieve_body($response);
-		$status = wp_remote_retrieve_response_code($response);
-		$headers = wp_remote_retrieve_headers($response);
-
-		// Return JSON response with the content.
-		wp_send_json(
-			array(
-				'body' => $body,
-				'status' => $status,
-				'headers' => $headers,
-			),
-			$status
 		);
 	}
 
