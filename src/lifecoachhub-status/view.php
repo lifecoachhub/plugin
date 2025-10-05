@@ -1,6 +1,6 @@
 <?php
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 $api_key = get_option('lifecoachhub_api_key') ?? '';
 $connection_status = get_option('lifecoachhub_connection_status') ?? '';
@@ -10,9 +10,6 @@ $not_connected_label = !empty($attributes['label_not_connected']) ? $attributes[
 ?>
 
 <div <?php echo wp_kses_data(get_block_wrapper_attributes()); ?>>
-    <?php if ($is_connected): ?>
-        <?php echo esc_html($connected_label); ?>
-    <?php else: ?>
-        <?php echo esc_html($not_connected_label); ?>
-    <?php endif; ?>
+    <span><?php echo esc_html($is_connected ? $connected_label : $not_connected_label); ?></span>
+    <span><?php echo $is_connected ? '✅' : '❌'; ?></span>
 </div>

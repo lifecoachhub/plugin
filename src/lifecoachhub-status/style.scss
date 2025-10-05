@@ -5,8 +5,13 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-lch-starter {
-	background-color: #21759b;
-	color: #fff;
+.wp-block-lifecoachhub-lifecoachhub-status {
 	padding: 2px;
+	gap: 8px;
+	display: flex;
+	align-items: center;
+
+	span {
+		margin-block-start: 0;
+	}
 }

@@ -80,7 +80,8 @@ export default function Edit({ attributes, setAttributes }) {
 			</InspectorControls>
 
 			<p {...useBlockProps()}>
-				{isConnected ? label_connected || __('Connected', 'lifecoachhub') : label_not_connected || __('Not Connected', 'lifecoachhub')}
+				<span>{isConnected ? label_connected || __('Connected', 'lifecoachhub') : label_not_connected || __('Not Connected', 'lifecoachhub')}</span>
+				<span>{isConnected ? '✅' : '❌'}</span>
 			</p>
 		</>
 	);

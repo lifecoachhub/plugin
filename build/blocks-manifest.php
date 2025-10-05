@@ -46,7 +46,8 @@ return array(
 				'fontWeight' => true,
 				'textTransform' => true,
 				'letterSpacing' => true
-			)
+			),
+			'layout' => true
 		),
 		'textdomain' => 'lifecoachhub',
 		'editorScript' => 'file:./index.js',
