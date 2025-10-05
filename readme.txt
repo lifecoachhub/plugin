@@ -1,7 +1,7 @@
 === Life Coach Hub ===
 Contributors: lifecoachhub
 Tags: coaching, business management, scheduling, client management, courses
-Tested up to: 6.8.3
+Tested up to: 6.8
 Stable tag: 0.1.0
 Requires PHP: 7.4.0
 License: GPL-2.0-or-later
