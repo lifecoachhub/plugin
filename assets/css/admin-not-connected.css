@@ -1,0 +1,73 @@
+/* Hide WordPress admin elements when not connected */
+.lifecoachhub-admin-not-connected #wpadminbar,
+.lifecoachhub-admin-not-connected #adminmenumain,
+.lifecoachhub-admin-not-connected #adminmenuwrap,
+.lifecoachhub-admin-not-connected #wpfooter {
+    display: none;
+}
+
+.lifecoachhub-admin-not-connected .lifecoachhub-admin-wrap {
+    margin: -32px 0px;
+}
+
+/* CTA button color override */
+.lifecoachhub-cta .button-secondary.button-hero {
+    color: #1d2327ba !important;
+}
+
+/* CTA section spacing */
+.cta-buttons-secondary {
+    margin-top: 40px;
+}
+
+.cta-buttons-tertiary {
+    margin-top: 0px;
+}
+
+.cta-secondary-text {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.button-text.button-hero {
+    margin-top: 0;
+}
+
+
+/* Iframe container styles - for connected state */
+.lifecoachhub-clean-iframe-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.lifecoachhub-clean-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+}
+
+/* Loading spinner styles */
+.lifecoachhub-spinner {
+    width: 20px;
+    height: 20px;
+    animation: lifecoachhub-spin 1s linear infinite;
+}
+
+@keyframes lifecoachhub-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading and fallback styles */
+#iframe-loading,
+#iframe-fallback {
+    text-align: center !important;
+    padding: 50px !important;
+}
+
+#iframe-fallback {
+    display: none;
+}

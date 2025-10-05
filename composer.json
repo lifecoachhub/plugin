@@ -1,0 +1,31 @@
+{
+    "name": "lifecoachhub/lifecoachhub",
+    "description": "Coaching and mentoring platform for coaches and clients.",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "LifeCoachHub\\": "includes/"
+        },
+        "files": [
+            "includes/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LifeCoachHub\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ManiruzzamanAkash",
+            "email": "manirujjamanakash@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0"
+    },
+    "require-dev": {},
+    "scripts": {
+        "autoload": "composer dump-autoload -o"
+    }
+}
