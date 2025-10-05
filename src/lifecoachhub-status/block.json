@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lifecoachhub/lifecoachhub-status",
+	"version": "0.1.0",
+	"title": "Life Coach Hub Status",
+	"category": "widgets",
+	"icon": "smiley",
+	"keywords": ["lifecoachhub", "status", "life coach hub"],
+	"description": "Get the current connection status of your Life Coach Hub account connected or not.",
+	"attributes": {
+		"label_connected": {
+			"type": "string"
+		},
+		"label_not_connected": {
+			"type": "string"
+		}
+	},
+	"example": {},
+	"supports": {
+		"interactivity": true,
+		"html": false,
+		"anchor": true,
+		"color": {
+			"gradients": true,
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fontFamily": true,
+			"fontWeight": true,
+			"textTransform": true,
+			"letterSpacing": true
+		}
+	},
+	"textdomain": "lifecoachhub",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./view.php"
+}

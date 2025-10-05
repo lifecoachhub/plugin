@@ -1,25 +1,56 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'lch-starter' => array(
+	'lifecoachhub-status' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'lifecoachhub/lch-starter',
+		'name' => 'lifecoachhub/lifecoachhub-status',
 		'version' => '0.1.0',
-		'title' => 'Life Coach Hub Starter',
+		'title' => 'Life Coach Hub Status',
 		'category' => 'widgets',
 		'icon' => 'smiley',
-		'description' => 'Example block scaffolded with Create Block tool for Life Coach Hub.',
+		'keywords' => array(
+			'lifecoachhub',
+			'status',
+			'life coach hub'
+		),
+		'description' => 'Get the current connection status of your Life Coach Hub account connected or not.',
+		'attributes' => array(
+			'label_connected' => array(
+				'type' => 'string'
+			),
+			'label_not_connected' => array(
+				'type' => 'string'
+			)
+		),
 		'example' => array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'interactivity' => true,
+			'html' => false,
+			'anchor' => true,
+			'color' => array(
+				'gradients' => true,
+				'background' => true,
+				'text' => true
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			),
+			'typography' => array(
+				'fontSize' => true,
+				'lineHeight' => true,
+				'fontFamily' => true,
+				'fontWeight' => true,
+				'textTransform' => true,
+				'letterSpacing' => true
+			)
 		),
 		'textdomain' => 'lifecoachhub',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
-		'viewScript' => 'file:./view.js'
+		'render' => 'file:./view.php'
 	)
 );
