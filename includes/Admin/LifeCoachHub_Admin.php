@@ -46,13 +46,13 @@ class LifeCoachHub_Admin
 			999
 		);
 
-		// Enqueue admin scripts and styles
+		// Enqueue admin scripts and styles.
 		add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
 
-		// Ajax handlers for proxy
+		// Ajax handlers for proxy.
 		add_action('wp_ajax_lifecoachhub_proxy', array($this, 'handle_proxy_request'));
 
-		// Handle API key callback and disconnect - moved to admin_init for early processing
+		// Handle API key callback and disconnect - moved to admin_init for early processing.
 		add_action('admin_init', array($this, 'handle_api_callback'));
 		add_action('admin_init', array($this, 'handle_disconnect'));
 
@@ -61,14 +61,14 @@ class LifeCoachHub_Admin
 	}
 
 	/**
-	 * Add admin menu
+	 * Add admin menu.
 	 */
 	public function add_admin_menu()
 	{
-		// Create custom menu icon using SVG data URI
+		// Create custom menu icon using SVG data URI.
 		$menu_icon = 'data:image/svg+xml;base64,' . base64_encode('<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_6005_74418)"><path d="M43.0953 12.25H41.6266V25.4688C41.6243 27.4157 40.8498 29.2823 39.4731 30.659C38.0964 32.0357 36.2298 32.8102 34.2828 32.8125H22.925L18.0781 37.2188H29.6181L40.434 45.8712C40.542 45.9575 40.6723 46.0115 40.8097 46.027C40.9472 46.0426 41.0862 46.019 41.2108 45.959C41.3354 45.899 41.4406 45.805 41.5141 45.6878C41.5877 45.5707 41.6267 45.4352 41.6266 45.2969V37.2188H43.0953C44.264 37.2188 45.3847 36.7545 46.211 35.9282C47.0374 35.1019 47.5016 33.9811 47.5016 32.8125V16.6562C47.5016 15.4876 47.0374 14.3669 46.211 13.5406C45.3847 12.7142 44.264 12.25 43.0953 12.25Z" fill="#65C467"/><path d="M34.2812 1.96875H4.90625C3.73764 1.96875 2.61689 2.43298 1.79056 3.25931C0.964229 4.08564 0.5 5.20639 0.5 6.375L0.5 25.4688C0.5 26.6374 0.964229 27.7581 1.79056 28.5844C2.61689 29.4108 3.73764 29.875 4.90625 29.875H7.84375V40.8906C7.84383 41.0328 7.88518 41.1719 7.96278 41.291C8.04038 41.4102 8.1509 41.5042 8.28091 41.5618C8.41093 41.6193 8.55485 41.6379 8.69521 41.6152C8.83557 41.5925 8.96633 41.5296 9.07162 41.4341L21.7881 29.875H34.2812C35.4499 29.875 36.5706 29.4108 37.3969 28.5844C38.2233 27.7581 38.6875 26.6374 38.6875 25.4688V6.375C38.6875 5.20639 38.2233 4.08564 37.3969 3.25931C36.5706 2.43298 35.4499 1.96875 34.2812 1.96875Z" fill="#0C8CE9"/></g><defs><clipPath id="clip0_6005_74418"><rect width="47" height="47" fill="white" transform="translate(0.5 0.5)"/></clipPath></defs></svg>');
 
-		// Main app page
+		// Main app page.
 		add_menu_page(
 			__('Life Coach Hub', 'lifecoachhub'),
 			__('Life Coach Hub', 'lifecoachhub'),
@@ -79,7 +79,7 @@ class LifeCoachHub_Admin
 			30
 		);
 
-		// Settings page
+		// Settings page.
 		add_submenu_page(
 			'lifecoachhub',
 			__('Settings', 'lifecoachhub'),
@@ -91,26 +91,41 @@ class LifeCoachHub_Admin
 	}
 
 	/**
-	 * Handle API key callback from external app
+	 * Handle API key callback from external app.
 	 */
 	public function handle_api_callback()
 	{
-		// Only handle on our admin page
+		// check permission.
+		if (!current_user_can('manage_options')) {
+			return;
+		}
+
+		// Only handle on our admin page.
 		if (!isset($_GET['page']) || 'lifecoachhub' !== $_GET['page']) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
-		// Check if we have API key and connection status
+		// Check if we have API key and connection status from external app.
 		if (isset($_GET['lifecoach_api_key']) && isset($_GET['connection_status'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$api_key = sanitize_text_field(wp_unslash($_GET['lifecoach_api_key'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$connection_status = sanitize_text_field(wp_unslash($_GET['connection_status'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-			// Store API key and connection status
+			// Additional validation: ensure API key format is expected.
+			if (empty($api_key) || strlen($api_key) < 10) {
+				return;
+			}
+
+			// Validate connection status is expected value.
+			if (!in_array($connection_status, array('success', 'failed', 'pending'), true)) {
+				return;
+			}
+
+			// Store API key and connection status.
 			update_option('lifecoachhub_api_key', $api_key);
 			update_option('lifecoachhub_connection_status', $connection_status);
 			update_option('lifecoachhub_connected_at', current_time('mysql'));
 
-			// Redirect to clean URL
+			// Redirect to clean URL.
 			$redirect_url = admin_url('admin.php?page=lifecoachhub');
 			if ('success' === $connection_status) {
 				$redirect_url = add_query_arg('connected', '1', $redirect_url);
@@ -126,6 +141,11 @@ class LifeCoachHub_Admin
 	 */
 	public function handle_disconnect()
 	{
+		// check permission.
+		if (!current_user_can('manage_options')) {
+			return;
+		}
+
 		// Only handle on settings page
 		if (!isset($_GET['page']) || 'lifecoachhub-settings' !== $_GET['page']) {
 			return;
@@ -222,7 +242,7 @@ class LifeCoachHub_Admin
 		if ('toplevel_page_lifecoachhub' === $hook) {
 			// Add body class for conditional styling when not connected.
 			if (!$is_connected) {
-				add_filter('admin_body_class', function($classes) {
+				add_filter('admin_body_class', function ($classes) {
 					return $classes . ' lifecoachhub-admin-not-connected';
 				});
 
@@ -299,7 +319,7 @@ class LifeCoachHub_Admin
 	 */
 	public function handle_proxy_request()
 	{
-		// Check nonce for security
+		// Check nonce for security.
 		if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'lifecoachhub_proxy_nonce')) {
 			wp_send_json_error(array('message' => 'Invalid security token'), 403);
 		}
@@ -311,6 +331,12 @@ class LifeCoachHub_Admin
 
 		// Get target URL
 		$target_path = isset($_REQUEST['path']) ? sanitize_text_field(wp_unslash($_REQUEST['path'])) : '';
+
+		// Validate target path to prevent unauthorized requests
+		if (empty($target_path)) {
+			wp_send_json_error(array('message' => 'Invalid target path'), 400);
+		}
+
 		$url = trailingslashit($this->app_url) . ltrim($target_path, '/');
 
 		// Set up the request
@@ -337,7 +363,10 @@ class LifeCoachHub_Admin
 		$args['method'] = $method;
 
 		if ('POST' === $method && isset($_POST) && !empty($_POST)) {
-			$args['body'] = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			// Remove nonce from POST data before forwarding
+			$post_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			unset($post_data['nonce']);
+			$args['body'] = $post_data;
 		}
 
 		// Make the request
@@ -399,6 +428,11 @@ class LifeCoachHub_Admin
 	 */
 	private function handle_settings_form()
 	{
+		// check permission.
+		if (!current_user_can('manage_options')) {
+			return;
+		}
+
 		// Check if form was submitted
 		if (!isset($_POST['lifecoachhub_settings_submit'])) {
 			return;
@@ -415,6 +449,12 @@ class LifeCoachHub_Admin
 
 		// Get API key from form
 		$api_key = isset($_POST['lifecoachhub_api_key']) ? sanitize_text_field(wp_unslash($_POST['lifecoachhub_api_key'])) : '';
+
+		// Validate API key format if provided
+		if (!empty($api_key) && strlen($api_key) < 10) {
+			add_settings_error('lifecoachhub_settings', 'invalid_api_key', __('Invalid API key format. Please check your API key.', 'lifecoachhub'), 'error');
+			return;
+		}
 
 		// Save settings
 		update_option('lifecoachhub_api_key', $api_key);
