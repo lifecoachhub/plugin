@@ -92,6 +92,36 @@ Coming soon to iOS!
 3. Log into your Life Coach Hub account (or register) when prompted
 4. Begin managing your coaching business directly from WordPress
 
+== External services ==
+
+This plugin connects to and relies on the Life Coach Hub external service to provide comprehensive coaching business management functionality.
+
+**What the service is and what it is used for:**
+Life Coach Hub (https://app.lifecoachhub.com) is a comprehensive coaching business management platform that provides tools for client management, session scheduling, payment processing, course creation, digital product sales, and business automation. This plugin integrates your WordPress site with your Life Coach Hub account, allowing you to access and manage your coaching business directly from your WordPress dashboard.
+
+**What data is sent and when:**
+- **Authentication data**: Your Life Coach Hub API key is sent to authenticate your connection when you log into the dashboard
+- **Proxy requests**: When you interact with coaching tools through the WordPress interface, requests are proxied to the Life Coach Hub servers to retrieve and update your coaching data
+- **Connection management**: During account connection and disconnection processes, your WordPress site URL and API credentials are transmitted
+- **Session data**: When managing clients, sessions, courses, and other coaching activities, relevant business data is transmitted to and from the Life Coach Hub platform
+
+**Data transmission occurs:**
+- When you first connect your Life Coach Hub account to WordPress.
+- Every time you access the coaching dashboard through WordPress.
+- When you manage clients, sessions, courses, or other coaching business activities.
+- During account disconnection processes.
+
+**Important notes:**
+- No client data is permanently stored in your WordPress database.
+- All sensitive coaching and client information remains securely hosted on Life Coach Hub's dedicated servers.
+- The plugin acts as a secure bridge between your WordPress site and your Life Coach Hub account.
+- You must have a Life Coach Hub account (free or paid) to use this plugin.
+
+**Service provider:** Life Coach Hub
+**Terms of Service:** https://lifecoachhub.com/terms-of-use
+**Privacy Policy:** https://lifecoachhub.com/privacy-policy
+**Service URL:** https://app.lifecoachhub.com
+
 == Frequently Asked Questions ==
 
 = What are the requirements to use this plugin? =
