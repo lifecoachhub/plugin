@@ -82,7 +82,7 @@ if ( ! $is_connected ) {
                                     <?php esc_html_e( 'Please click the Connect button below to connect with Life Coach Hub. In a new window, it will open Life Coach Hub portal to connect. Once connected, you will be able to manage your coaching business directly from your WordPress dashboard.', 'lifecoachhub' ); ?>
                                 </p>
                                 <p>
-                                    <a href="<?php echo esc_url( $app_url ); ?>" class="button button-primary button-hero" style="background: #0073aa !important; color: #ffffff;">
+                                    <a href="<?php echo esc_url( $app_url ); ?>" class="button button-primary button-hero btn-connect">
                                         <?php esc_html_e( 'Connect', 'lifecoachhub' ); ?>
                                         <span class="dashicons dashicons-admin-plugins"></span>
                                     </a>
@@ -96,7 +96,7 @@ if ( ! $is_connected ) {
                             <?php esc_html_e( 'Quick Links', 'lifecoachhub' ); ?>
                         </th>
                         <td>
-                            <p style="display: flex; gap: 10px;">
+                            <p class="settings-page-quick-links">
                                 <?php if ( $is_connected ) : ?>
                                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=lifecoachhub' ) ); ?>" class="button button-primary">
                                     <?php esc_html_e( 'Go to Life Coach Hub Dashboard', 'lifecoachhub' ); ?>

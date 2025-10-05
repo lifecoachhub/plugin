@@ -1180,5 +1180,18 @@
 }
 
 #iframe-loading p {
-    text-align: center;
+	text-align: center;
+}
+
+.btn-connect {
+	background: #0073aa !important;
+	color: #ffffff;
+}
+
+.settings-page-quick-links {
+	margin-top: 20px;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
 }

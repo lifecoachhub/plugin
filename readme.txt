@@ -1,7 +1,7 @@
 === Life Coach Hub ===
 Contributors: lifecoachhub
 Tags: coaching, business management, scheduling, client management, courses
-Tested up to: 6.8
+Tested up to: 6.8.3
 Stable tag: 0.1.0
 Requires PHP: 7.4.0
 License: GPL-2.0-or-later
@@ -121,6 +121,6 @@ For help, visit https://lifecoachhub.com/support
 
 == Changelog ==
 
-= 0.1.0 - July 05, 2025 =
+= 0.1.0 - Oct 06, 2025 =
 * Initial release with coach/client can connect their site with Life Coach Hub.
 * Client can connect / disconnect their Life Coach Hub site directly.

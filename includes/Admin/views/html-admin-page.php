@@ -5,7 +5,7 @@
  * @package LifeCoachHub
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if (!defined('ABSPATH')) {
 	exit;
 }
@@ -233,7 +233,7 @@ if ($is_connected): ?>
 						<?php esc_html_e('Get Started Now', 'lifecoachhub'); ?>
 						<span class="dashicons dashicons-arrow-right-alt"></span>
 					</a>
-					<a href="<?php echo esc_url(admin_url()); ?>" class="button button-secondary button-hero" style="color: #1d2327ba !important;">
+					<a href="<?php echo esc_url(admin_url()); ?>" class="button button-secondary button-hero">
 						<?php esc_html_e('Go Back to Dashboard', 'lifecoachhub'); ?>
 						<span class="dashicons dashicons-dashboard"></span>
 					</a>
