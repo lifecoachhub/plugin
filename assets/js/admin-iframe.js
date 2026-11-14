@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const apiKey = config.apiKey || '';
     const adminPageUrl = config.adminPageUrl || '';
     const connectorScriptUrl = config.connectorScriptUrl || '';
+    let appOrigin = '';
+    try {
+        appOrigin = new URL(baseUrl).origin;
+    } catch (e) {
+        appOrigin = '';
+    }
     
     let loadTimeout;
 
@@ -36,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         embedded: true,
                         source: 'external_connection',
                         wordpressOrigin: window.location.origin
-                    }, '*');
+                    }, appOrigin);
                 }, 500);
             }
         } catch (error) {
@@ -50,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     embedded: true,
                     source: 'external_connection',
                     wordpressOrigin: window.location.origin
-                }, '*');
+                }, appOrigin);
             }, 1000);
         }
     }
@@ -65,6 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             // It's just a path, prepend base URL
             url = new URL(path.startsWith('/') ? path : '/' + path, baseUrl);
+        }
+
+        // Only ever load Life Coach Hub pages, since the URL carries the API key.
+        if (url.origin !== appOrigin) {
+            return;
         }
 
         // Always ensure our required parameters are set
@@ -140,15 +151,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen for navigation messages from iframe
     window.addEventListener('message', function (event) {
-        // Be more lenient with origin checking (if running on different ports/domains)
-        if (event.origin.startsWith(baseUrl) || event.origin.includes('localhost')) {
+        // Only accept messages from the Life Coach Hub app.
+        if (appOrigin && event.origin === appOrigin) {
             // Handle navigation requests from iframe
             if (event.data && event.data.type === 'navigate') {
                 updateIframeUrl(event.data.path);
             }
 
             // Handle URL changes from iframe
-            if (event.data && event.data.type === 'url_changed' || event.data.type === 'location_change') {
+            if (event.data && (event.data.type === 'url_changed' || event.data.type === 'location_change')) {
                 updateBrowserUrl(event.data.path || event.data.url);
             }
 

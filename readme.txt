@@ -1,8 +1,9 @@
 === Life Coach Hub ===
 Contributors: lifecoachhub
 Tags: coaching, business management, scheduling, client management, courses
-Tested up to: 6.8
-Stable tag: 0.1.0
+Requires at least: 6.7
+Tested up to: 7.1
+Stable tag: 0.2.0
 Requires PHP: 7.4.0
 License: GPL-2.0-or-later
 Author: Life Coach Hub
@@ -127,7 +128,7 @@ Life Coach Hub (https://app.lifecoachhub.com) is a comprehensive coaching busine
 = What are the requirements to use this plugin? =
 
 - Requires a Life Coach Hub account (free or paid)
-- Works with WordPress 5.0+
+- Works with WordPress 6.7 or newer
 - No coding required
 
 = Is my client data secure? =
@@ -150,6 +151,12 @@ For help, visit https://lifecoachhub.com/support
 8. Client Folder Details
 
 == Changelog ==
+
+= 0.2.0 - Nov 14, 2026 =
+* Tested with WordPress 7.1.
+* Security: the API key is only sent to the Life Coach Hub app, and the embedded view only opens Life Coach Hub pages.
+* Disconnecting now uses a safe redirect to the Life Coach Hub app.
+* Plugin data is removed when the plugin is deleted.
 
 = 0.1.0 - Oct 06, 2025 =
 * Initial release with coach/client can connect their site with Life Coach Hub.

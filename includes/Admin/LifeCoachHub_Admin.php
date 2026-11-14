@@ -163,7 +163,13 @@ class LifeCoachHub_Admin
 		}
 
 		// Generate disconnect URL.
-		$external_app_url = LIFECOACHHUB_APP_URL . '/external/connection/disconnect?redirect_url=' . urlencode(admin_url('admin.php?page=lifecoachhub-settings&disconnected=1')) . '&api_key=' . get_option('lifecoachhub_api_key');
+		$external_app_url = add_query_arg(
+			array(
+				'redirect_url' => rawurlencode(admin_url('admin.php?page=lifecoachhub-settings&disconnected=1')),
+				'api_key'      => rawurlencode((string) get_option('lifecoachhub_api_key')),
+			),
+			LIFECOACHHUB_APP_URL . '/external/connection/disconnect'
+		);
 
 		// Delete all connection related options.
 		delete_option('lifecoachhub_api_key');
@@ -171,8 +177,25 @@ class LifeCoachHub_Admin
 		delete_option('lifecoachhub_connected_at');
 
 		// Redirect to external app for disconnection.
-		wp_redirect($external_app_url);
+		add_filter('allowed_redirect_hosts', array($this, 'allow_app_redirect_host'));
+		wp_safe_redirect($external_app_url);
 		exit;
+	}
+
+	/**
+	 * Allow redirects to the Life Coach Hub app host.
+	 *
+	 * @param string[] $hosts Allowed hosts.
+	 * @return string[]
+	 */
+	public function allow_app_redirect_host($hosts)
+	{
+		$app_host = wp_parse_url(LIFECOACHHUB_APP_URL, PHP_URL_HOST);
+		if ($app_host) {
+			$hosts[] = $app_host;
+		}
+
+		return $hosts;
 	}
 
 	/**
@@ -232,7 +255,7 @@ class LifeCoachHub_Admin
 			'lifecoachhub-admin',
 			LIFECOACHHUB_PLUGIN_URL . 'assets/css/admin.css',
 			array(),
-			'1.0.0'
+			LIFECOACHHUB_VERSION
 		);
 
 		// Enqueue admin page specific styles for main page only.
@@ -248,7 +271,7 @@ class LifeCoachHub_Admin
 					'lifecoachhub-admin-not-connected',
 					LIFECOACHHUB_PLUGIN_URL . 'assets/css/admin-not-connected.css',
 					array(),
-					'1.0.0'
+					LIFECOACHHUB_VERSION
 				);
 			}
 		}
@@ -258,7 +281,7 @@ class LifeCoachHub_Admin
 			'lifecoachhub-admin-js',
 			LIFECOACHHUB_PLUGIN_URL . 'assets/js/admin.js',
 			array('jquery'),
-			'1.0.0',
+			LIFECOACHHUB_VERSION,
 			true
 		);
 
@@ -268,7 +291,7 @@ class LifeCoachHub_Admin
 				'lifecoachhub-admin-iframe',
 				LIFECOACHHUB_PLUGIN_URL . 'assets/js/admin-iframe.js',
 				array(),
-				'1.0.0',
+				LIFECOACHHUB_VERSION,
 				true
 			);
 

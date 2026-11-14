@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- This file is included inside a function, so its variables are local.
 /**
  * Admin Settings Page View
  *

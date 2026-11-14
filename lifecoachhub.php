@@ -2,10 +2,9 @@
 /**
  * Plugin Name:       Life Coach Hub
  * Description:       Coaching and mentoring platform for coaches and clients.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.7
  * Requires PHP:      7.4.0
- * Tested up to:      6.8
  * Author:            Life Coach Hub
  * Author URI:        https://lifecoachhub.com
  * License:           GPL-2.0-or-later
@@ -19,6 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Define plugin constants
+define( 'LIFECOACHHUB_VERSION', '0.2.0' );
 define( 'LIFECOACHHUB_PLUGIN_FILE', __FILE__ );
 define( 'LIFECOACHHUB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LIFECOACHHUB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -153,7 +153,7 @@ class LifeCoachHub {
             'lifecoachhub-external-connector',
             LIFECOACHHUB_PLUGIN_URL . 'assets/js/external-connector.js',
             array(),
-            '1.0.0',
+            LIFECOACHHUB_VERSION,
             true
         );
     }
