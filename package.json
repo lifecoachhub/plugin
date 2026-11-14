@@ -16,13 +16,13 @@
 		"uninstall.php"
 	],
 	"scripts": {
-		"build": "wp-scripts build --blocks-manifest",
+		"build": "wp-scripts build --blocks-manifest --experimental-modules",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "node .dev/release.js",
-		"start": "wp-scripts start --blocks-manifest"
+		"start": "wp-scripts start --blocks-manifest --experimental-modules"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^30.17.0",

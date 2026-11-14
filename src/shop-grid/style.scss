@@ -1,0 +1,325 @@
+/**
+ * Life Coach Hub Shop block. Inherits the theme's fonts, colors and buttons.
+ */
+
+/* Defaults, overridden by the block's Styles settings. */
+.wp-block-lifecoachhub-shop-grid {
+	--lifecoachhub-shop-gap: var(--wp--style--block-gap, 1.5rem);
+	--lifecoachhub-shop-border: color-mix(in srgb, currentcolor 14%, transparent);
+	--lifecoachhub-shop-muted: color-mix(in srgb, currentcolor 65%, transparent);
+	--lifecoachhub-shop-surface: color-mix(in srgb, currentcolor 4%, transparent);
+
+	.lifecoachhub-shop__toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1rem;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--lifecoachhub-shop-gap);
+	}
+
+	.lifecoachhub-shop__filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.lifecoachhub-shop__filter {
+		appearance: none;
+		background: transparent;
+		border: 1px solid var(--lifecoachhub-shop-border);
+		border-radius: 999px;
+		color: inherit;
+		cursor: pointer;
+		font: inherit;
+		font-size: 0.9em;
+		line-height: 1.2;
+		padding: 0.45em 1em;
+		transition: background-color 0.15s ease, border-color 0.15s ease;
+
+		&:hover {
+			border-color: currentcolor;
+		}
+
+		&:focus-visible {
+			outline: 2px solid currentcolor;
+			outline-offset: 2px;
+		}
+
+		&.is-active {
+			background: var(--lifecoachhub-shop-filter-active-bg, var(--wp--preset--color--contrast, #1f2937));
+			border-color: var(--lifecoachhub-shop-filter-active-bg, var(--wp--preset--color--contrast, #1f2937));
+			color: var(--lifecoachhub-shop-filter-active-text, var(--wp--preset--color--base, #fff));
+		}
+	}
+
+	.lifecoachhub-shop__controls {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-left: auto;
+	}
+
+	.lifecoachhub-shop__search,
+	.lifecoachhub-shop__sort {
+		background: transparent;
+		border: 1px solid var(--lifecoachhub-shop-border);
+		border-radius: 8px;
+		color: inherit;
+		font: inherit;
+		font-size: 0.9em;
+		min-height: 2.5em;
+		padding: 0.4em 0.75em;
+	}
+
+	.lifecoachhub-shop__search {
+		flex: 1 1 14rem;
+		max-width: 20rem;
+		width: auto;
+	}
+
+	.lifecoachhub-shop__sort {
+		flex: 0 0 auto;
+		width: auto;
+	}
+
+	.lifecoachhub-shop__grid {
+		display: grid;
+		gap: var(--lifecoachhub-shop-gap);
+		grid-template-columns: repeat(var(--lifecoachhub-shop-columns, 3), minmax(0, 1fr));
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.lifecoachhub-shop__card {
+		background: var(--lifecoachhub-shop-card-bg, var(--lifecoachhub-shop-surface));
+		border: var(--lifecoachhub-shop-card-border-width, 1px) solid var(--lifecoachhub-shop-card-border-color, var(--lifecoachhub-shop-border));
+		border-radius: var(--lifecoachhub-shop-radius, 12px);
+		box-shadow: var(--lifecoachhub-shop-card-shadow, none);
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		overflow: hidden;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+		&:hover {
+			transform: translateY(-2px);
+		}
+
+		&[hidden] {
+			display: none;
+		}
+	}
+
+	.lifecoachhub-shop__media {
+		aspect-ratio: var(--lifecoachhub-shop-image-ratio, auto);
+		background: var(--lifecoachhub-shop-border);
+		overflow: hidden;
+
+		img {
+			display: block;
+			height: 100%;
+			object-fit: var(--lifecoachhub-shop-image-fit, cover);
+			width: 100%;
+		}
+	}
+
+	.lifecoachhub-shop__body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding: var(--lifecoachhub-shop-card-padding, 1.25rem);
+	}
+
+	.lifecoachhub-shop__type {
+		color: var(--lifecoachhub-shop-muted);
+		font-size: 0.75em;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.lifecoachhub-shop__title {
+		font-size: var(--lifecoachhub-shop-title-size, 1.15em);
+		line-height: 1.3;
+		margin: 0;
+	}
+
+	.lifecoachhub-shop__description {
+		color: var(--lifecoachhub-shop-muted);
+		font-size: 0.95em;
+		margin: 0;
+	}
+
+	.lifecoachhub-shop__footer {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin-top: auto;
+		padding-top: 0.75rem;
+	}
+
+	.lifecoachhub-shop__price {
+		align-items: baseline;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4em;
+		margin: 0;
+
+		strong {
+			font-size: var(--lifecoachhub-shop-price-size, 1.2em);
+		}
+	}
+
+	.lifecoachhub-shop__cadence,
+	.lifecoachhub-shop__original {
+		color: var(--lifecoachhub-shop-muted);
+		font-size: 0.9em;
+	}
+
+	.lifecoachhub-shop__actions {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1rem;
+	}
+
+	.lifecoachhub-shop__buy,
+	.lifecoachhub-shop__details--button {
+		text-decoration: none;
+	}
+
+	// Outline version of the theme button for the details link.
+	.lifecoachhub-shop__details.lifecoachhub-shop__details--button {
+		background: transparent;
+		border: 1px solid currentcolor;
+		color: inherit;
+	}
+
+	// Card shadow presets.
+	&.has-card-shadow-soft {
+		--lifecoachhub-shop-card-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.18);
+	}
+
+	&.has-card-shadow-medium {
+		--lifecoachhub-shop-card-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.28);
+	}
+
+	&.has-card-shadow-strong {
+		--lifecoachhub-shop-card-shadow: 0 18px 45px -14px rgba(0, 0, 0, 0.4);
+	}
+
+	// Only set in the block, so the theme's button style stays the default.
+	&.has-button-bg .lifecoachhub-shop__buy {
+		background-color: var(--lifecoachhub-shop-button-bg);
+	}
+
+	&.has-button-bg .lifecoachhub-shop__details--button {
+		color: var(--lifecoachhub-shop-button-bg);
+	}
+
+	&.has-button-text .lifecoachhub-shop__buy {
+		color: var(--lifecoachhub-shop-button-text);
+	}
+
+	&.has-button-radius .lifecoachhub-shop__buy,
+	&.has-button-radius .lifecoachhub-shop__details--button {
+		border-radius: var(--lifecoachhub-shop-button-radius);
+	}
+
+	.lifecoachhub-shop__details {
+		color: inherit;
+		font-size: 0.95em;
+		text-underline-offset: 0.2em;
+	}
+
+	.lifecoachhub-shop__sold-out {
+		border: 1px solid var(--lifecoachhub-shop-border);
+		border-radius: 999px;
+		color: var(--lifecoachhub-shop-muted);
+		font-size: 0.85em;
+		padding: 0.35em 0.9em;
+	}
+
+	.lifecoachhub-shop__empty,
+	.lifecoachhub-shop__notice {
+		color: var(--lifecoachhub-shop-muted);
+		margin: 1rem 0 0;
+		text-align: center;
+	}
+
+	// List: one offer per row, image on the left.
+	&.is-style-list {
+
+		.lifecoachhub-shop__grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.lifecoachhub-shop__card {
+			flex-direction: row;
+		}
+
+		.lifecoachhub-shop__media {
+			aspect-ratio: var(--lifecoachhub-shop-image-ratio, 1);
+			flex: 0 0 min(30%, 220px);
+		}
+
+		.lifecoachhub-shop__footer {
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+
+	// Minimal: no card chrome, just typography.
+	&.is-style-minimal {
+
+		.lifecoachhub-shop__card {
+			background: var(--lifecoachhub-shop-card-bg, transparent);
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+
+			&:hover {
+				transform: none;
+			}
+		}
+
+		.lifecoachhub-shop__media {
+			border-radius: var(--lifecoachhub-shop-radius, 12px);
+		}
+
+		.lifecoachhub-shop__body {
+			padding: 1rem 0 0;
+		}
+	}
+
+	@media (max-width: 900px) {
+
+		.lifecoachhub-shop__grid {
+			grid-template-columns: repeat(min(var(--lifecoachhub-shop-columns, 3), 2), minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 600px) {
+
+		.lifecoachhub-shop__grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.lifecoachhub-shop__controls,
+		.lifecoachhub-shop__search {
+			width: 100%;
+		}
+
+		&.is-style-list .lifecoachhub-shop__card {
+			flex-direction: column;
+		}
+
+		&.is-style-list .lifecoachhub-shop__media {
+			flex-basis: auto;
+		}
+	}
+}

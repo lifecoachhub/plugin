@@ -126,6 +126,15 @@ class LifeCoachHub {
         // Register blocks
         add_action( 'init', array( $this, 'register_blocks' ) );
 
+        // Register block patterns
+        add_action( 'init', array( $this, 'register_patterns' ) );
+
+        // Give the Shop block's Layout picker the same presets the patterns use
+        add_action( 'enqueue_block_editor_assets', array( $this, 'share_shop_layouts' ) );
+
+        // Store REST route for the block editor
+        lifecoachhub_safe_instantiate( 'LifeCoachHub\\Api\\LifeCoachHub_Rest' );
+
         // Register external connector script
         add_action( 'admin_enqueue_scripts', array( $this, 'register_external_connector' ) );
 
@@ -201,6 +210,35 @@ class LifeCoachHub {
                 register_block_type( $block_path );
             }
         }
+    }
+
+    /**
+     * Register block patterns built from the plugin's blocks.
+     */
+    public function register_patterns() {
+        if ( lifecoachhub_class_exists( 'LifeCoachHub\\Patterns\\LifeCoachHub_Patterns' ) ) {
+            \LifeCoachHub\Patterns\LifeCoachHub_Patterns::register();
+        }
+    }
+
+    /**
+     * Pass the layout presets to the Shop block editor script.
+     */
+    public function share_shop_layouts() {
+        if ( ! lifecoachhub_class_exists( 'LifeCoachHub\\Patterns\\LifeCoachHub_Patterns' ) ) {
+            return;
+        }
+
+        $handle = generate_block_asset_handle( 'lifecoachhub/shop-grid', 'editorScript' );
+        if ( ! wp_script_is( $handle, 'registered' ) ) {
+            return;
+        }
+
+        wp_add_inline_script(
+            $handle,
+            'window.lifecoachhubShopLayouts = ' . wp_json_encode( \LifeCoachHub\Patterns\LifeCoachHub_Patterns::editor_layouts() ) . ';',
+            'before'
+        );
     }
 
     /**

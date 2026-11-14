@@ -1,0 +1,241 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "lifecoachhub/shop-grid",
+  "version": "0.2.0",
+  "title": "Life Coach Hub Shop",
+  "category": "widgets",
+  "icon": "store",
+  "description": "Show your Life Coach Hub offers as a shop, with filters, search and buy buttons.",
+  "keywords": [
+    "shop",
+    "store",
+    "offers",
+    "coaching",
+    "life coach hub"
+  ],
+  "textdomain": "lifecoachhub",
+  "attributes": {
+    "offerTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "limit": {
+      "type": "number",
+      "default": 0
+    },
+    "showFilters": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSearch": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSort": {
+      "type": "boolean",
+      "default": true
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "buyLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "detailsLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "openInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "selectionMode": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "manual"
+      ],
+      "default": "auto"
+    },
+    "selectedOffers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "defaultSort": {
+      "type": "string",
+      "enum": [
+        "name",
+        "price-asc",
+        "price-desc",
+        "manual"
+      ],
+      "default": "name"
+    },
+    "filterLabels": {
+      "type": "object",
+      "default": {}
+    },
+    "showTypeLabel": {
+      "type": "boolean",
+      "default": true
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 3
+    },
+    "imageAspectRatio": {
+      "type": "string",
+      "default": "16/9"
+    },
+    "imageFit": {
+      "type": "string",
+      "enum": [
+        "cover",
+        "contain"
+      ],
+      "default": "cover"
+    },
+    "detailsStyle": {
+      "type": "string",
+      "enum": [
+        "link",
+        "button"
+      ],
+      "default": "link"
+    },
+    "cardBackground": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBorderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBorderWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "cardRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "cardPadding": {
+      "type": "string",
+      "default": ""
+    },
+    "cardShadow": {
+      "type": "string",
+      "enum": [
+        "none",
+        "soft",
+        "medium",
+        "strong"
+      ],
+      "default": "none"
+    },
+    "buttonBackground": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "filterActiveBackground": {
+      "type": "string",
+      "default": ""
+    },
+    "filterActiveTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleFontSize": {
+      "type": "string",
+      "default": ""
+    },
+    "priceFontSize": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "interactivity": true,
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalLetterSpacing": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true,
+    "dimensions": {
+      "minHeight": true
+    }
+  },
+  "styles": [
+    {
+      "name": "cards",
+      "label": "Cards",
+      "isDefault": true
+    },
+    {
+      "name": "list",
+      "label": "List"
+    },
+    {
+      "name": "minimal",
+      "label": "Minimal"
+    }
+  ],
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScriptModule": "file:./view.js",
+  "render": "file:./render.php"
+}

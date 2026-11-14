@@ -30,6 +30,7 @@ With this plugin, you can:
 * Manage clients, sessions, courses, digital products, and payments — all from one integrated coaching backend
 * Assign tools, take notes, track progress, and engage clients with session forms, notes, plans, goals and journaling— directly inside your LCH account
 * Access the full Coaching Success Stack — your scheduling, automation, and business growth tools, now just one click away
+* Show your offers on any page with the Life Coach Hub Shop block — pick a ready-made layout, choose which offers to show, and style it to match your theme
 
 ## How It Works (Step-by-Step Setup)
 
@@ -105,15 +106,17 @@ Life Coach Hub (https://app.lifecoachhub.com) is a comprehensive coaching busine
 - **Proxy requests**: When you interact with coaching tools through the WordPress interface, requests are proxied to the Life Coach Hub servers to retrieve and update your coaching data
 - **Connection management**: During account connection and disconnection processes, your WordPress site URL and API credentials are transmitted
 - **Session data**: When managing clients, sessions, courses, and other coaching activities, relevant business data is transmitted to and from the Life Coach Hub platform
+- **Shop block**: To show the Shop block, your API key is sent to Life Coach Hub to fetch your published offers (title, description, image, price and links). Visitor data is not sent. Offers are cached in WordPress for 10 minutes, and the last successful copy is kept so the shop still shows if the service is briefly unavailable
 
 **Data transmission occurs:**
 - When you first connect your Life Coach Hub account to WordPress.
 - Every time you access the coaching dashboard through WordPress.
 - When you manage clients, sessions, courses, or other coaching business activities.
+- When a page with the Shop block is shown or edited and the cached offers have expired, or when an admin clicks Refresh in the block toolbar.
 - During account disconnection processes.
 
 **Important notes:**
-- No client data is permanently stored in your WordPress database.
+- No client data is permanently stored in your WordPress database. Only your public offer details are cached for the Shop block.
 - All sensitive coaching and client information remains securely hosted on Life Coach Hub's dedicated servers.
 - The plugin acts as a secure bridge between your WordPress site and your Life Coach Hub account.
 - You must have a Life Coach Hub account (free or paid) to use this plugin.
@@ -154,6 +157,8 @@ For help, visit https://lifecoachhub.com/support
 
 = 0.2.0 - Nov 14, 2026 =
 * Tested with WordPress 7.1.
+* New: Shop block to show your Life Coach Hub offers on any page, with filters, search and sorting.
+* New: Ready-made shop page patterns, and a Layout picker in the Shop block toolbar.
 * Security: the API key is only sent to the Life Coach Hub app, and the embedded view only opens Life Coach Hub pages.
 * Disconnecting now uses a safe redirect to the Life Coach Hub app.
 * Plugin data is removed when the plugin is deleted.

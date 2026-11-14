@@ -12,3 +12,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'lifecoachhub_api_key' );
 delete_option( 'lifecoachhub_connection_status' );
 delete_option( 'lifecoachhub_connected_at' );
+delete_option( 'lifecoachhub_store_last_good' );
+delete_transient( 'lifecoachhub_store' );
